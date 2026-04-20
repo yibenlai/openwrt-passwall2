@@ -60,11 +60,21 @@ config global_subscribe
 	
 config global_singbox
 
+config shunt_rules 'Private'
+	option remarks 'Private'
+	option network 'tcp,udp'
+	option ip_list 'geoip:private'
+
 config shunt_rules 'China'
 	option remarks 'China'
 	option network 'tcp,udp'
 	option domain_list 'geosite:cn'
 	option ip_list 'geoip:cn'
+
+config shunt_rules 'GFW'
+	option remarks 'GFW'
+	option network 'tcp,udp'
+	option domain_list 'geosite:geolocation-!cn'
 
 config shunt_rules 'Iran'
 	option remarks 'Iran'
@@ -105,6 +115,9 @@ config nodes 'rulenode'
 	option type 'Xray'
 	option protocol '_shunt'
 	option default_node 'examplenode'
+	option Private '_direct'
+	option China '_direct'
+	option GFW '_default'
 	option domainStrategy 'IPOnDemand'
 	option domainMatcher 'hybrid'
 	option write_ipset_direct '1'
